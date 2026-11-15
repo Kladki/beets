@@ -1393,8 +1393,9 @@ class LyricsPlugin(LyricsRequestHandler, plugins.BeetsPlugin):
             ):
                 return text, True
 
-            if text := (mediafile.lyrics or "").strip():
-                return text, Lyrics(text).synced
+            lyrics = Lyrics((mediafile.lyrics or "").strip())
+            if lyrics.text:
+                return lyrics.text, lyrics.synced
 
         return None
 
